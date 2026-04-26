@@ -3,13 +3,14 @@ addpath(genpath('src'));
 
 % ========================================
 % CONTROL FLAGS
-% ========================================
-NUM_WAVEFORMS   = 10;      % no. of waveforms (realizations)
-NUM_BITS        = 5;      % no. of bits per one waveform
-A               = 4;        % Amplitude
-TP              = 30;       % Pulse duration
-TS              = 10;       % Sampling rate (DAC Activated Period)
-SpB             = TP / TS;  % Samples per Bit
+% ====================
+NUM_WAVEFORMS   = 500;              % no. of waveforms (realizations)
+NUM_BITS        = 100;              % no. of bits per one waveform
+A               = 4;                % Amplitude
+TP              = 70;               % Pulse duration
+TS              = 10;               % Sampling rate (DAC Activated Period)
+SpB             = TP / TS;          % Samples per Bit
+NUM_SAMPLES     = SpB * NUM_BITS;   %  no. of samples
 
 % =======================================
 % Ensemble Generation
@@ -47,16 +48,39 @@ stat_mean_vector_pnrz = stat_mean(ensemble_pnrz);
 stat_mean_vector_prz  = stat_mean(ensemble_prz );
 
 % Time Mean Vectors
-time_mean_vector_unip = time_mean(ensemble_unip);
-time_mean_vector_pnrz = time_mean(ensemble_pnrz);
-time_mean_vector_prz  = time_mean(ensemble_prz );
+time_mean_vector_unip = time_mean(ensemble_unip,1);
+time_mean_vector_pnrz = time_mean(ensemble_pnrz,1);
+time_mean_vector_prz  = time_mean(ensemble_prz,1);
 
 % Statistical Autocorrelation Vectors
-stat_acf_vector_unip  = stat_acf(ensemble_unip);
+stat_acf_vector_unip  = stat_acf(ensemble_shifted_unip);
 stat_acf_vector_pnrz  = stat_acf(ensemble_pnrz);
-stat_acf_vector_prz   = stat_acf(ensemble_prz );
+stat_acf_vector_prz   = stat_acf(ensemble_prz )
 
 % Time Autocorrelation Vectors
 time_acf_vector_unip  = time_acf(ensemble_unip, 1);
 time_acf_vector_pnrz  = time_acf(ensemble_pnrz, 1);
 time_acf_vector_prz   = time_acf(ensemble_prz , 1);
+
+% Plot Power Spectral Density
+plot_psd(ensemble_unip,TS,1,"Unipolar ensemble PSD");
+    
+% plot statistical mean 
+plot_mean(ensemble_shifted_unip, 2, 1, "Unipolar stat mean"); 
+plot_mean(ensemble_shifted_pnrz, 2, 2, "polar NRZ stat mean"); 
+plot_mean(ensemble_shifted_prz, 2, 3, "polar RZ stat mean"); 
+
+
+% Plot Autocorrelation Function 
+
+
+
+% Stationary Process Check
+sp_check(ensemble_unip, NUM_WAVEFORMS, NUM_SAMPLES, 4);
+sp_check(ensemble_pnrz, NUM_WAVEFORMS, NUM_SAMPLES, 5);
+sp_check(ensemble_prz, NUM_WAVEFORMS, NUM_SAMPLES, 6);
+
+
+
+
+
