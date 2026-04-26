@@ -53,7 +53,7 @@ time_mean_vector_pnrz = time_mean(ensemble_pnrz,1);
 time_mean_vector_prz  = time_mean(ensemble_prz,1);
 
 % Statistical Autocorrelation Vectors
-stat_acf_vector_unip  = stat_acf(ensemble_shifted_unip);
+stat_acf_vector_unip  = stat_acf(ensemble_unip);
 stat_acf_vector_pnrz  = stat_acf(ensemble_pnrz);
 stat_acf_vector_prz   = stat_acf(ensemble_prz )
 

@@ -52,9 +52,9 @@ function sp_check(ensemble,num_waveforms,num_samples,fig_num)
     title ("ACF average");
     grid on ;
 
-    acf_diff = mean (acf_avg);
-    fprintf ('Mean variance : .%4f\n ' ,  mean_var);
-    fprintf ('ACF diff      : .%4f\n', acf_diff);
+acf_diff = mean(abs(acf_t1(1:min_len) - acf_t2(1:min_len)));
+    fprintf ('Mean variance : %4f\n ' ,  mean_var);
+    fprintf ('ACF diff      : %4f\n', acf_diff);
 
     if mean_var < mean_thr && acf_diff <acf_thr
         fprintf ("Process is Stationary\n");
