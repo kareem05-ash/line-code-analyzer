@@ -15,7 +15,7 @@ function [is_erg, mean_diff] = ep_check(ensemble, waveform_idx, tol, type_str)
         mean_diff   = abs(t_mean - ens_mean);
         is_erg      = mean_diff < tol;
     % Report
-        fprintf('\n=== %s ===', type_str);
+        fprintf('\n=== %s ===\n', type_str);
         fprintf('Ensemble Mean : %.4f\n', ens_mean);
         fprintf('Time Mean     : %.4f\n', t_mean);
         fprintf('Mean Diff     : %.4f\n', mean_diff);
