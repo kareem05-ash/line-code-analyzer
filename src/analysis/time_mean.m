@@ -2,12 +2,10 @@
 %   for a given ensemble for each realization
 % Arguments:
 %   ensemble            -> Ensemble 2D Matrix
+%   waveform_idx        -> Waveform Index
 % Outputs:
-%   time_mean_vector    -> Vector of time mean for each realization
-function time_mean_vector = time_mean(ensemble)
-    time_mean_vector = zeros(1, size(ensemble, 1));
-    for waveform_idx = 1 : size(ensemble, 1)
-        SUM = sum(ensemble(waveform_idx, :));
-        time_mean_vector(1, waveform_idx) = SUM / size(ensemble, 2);
-    end
+%   time_mean_val       -> Time Mean Value for a specific waveform
+function time_mean_val = time_mean(ensemble, waveform_idx)
+    waveform        = ensemble(waveform_idx, :);
+    time_mean_val   = sum(waveform) / length(waveform);
 end
